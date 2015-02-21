@@ -7,7 +7,7 @@
   <name>ReportNG</name>
   <groupId>org.uncommons</groupId>
   <artifactId>reportng</artifactId>
-  <version>@VERSION@</version>
+  <version>1.1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
   <url>https://reportng.dev.java.net/</url>
 
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>[5.0,)</version>
+      <version>6.8.21</version>
     </dependency>
     <dependency>
       <groupId>velocity</groupId>
@@ -31,5 +31,43 @@
       <version>1.4</version>
     </dependency>
   </dependencies>
-  
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.9.1</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/java/main</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/java/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

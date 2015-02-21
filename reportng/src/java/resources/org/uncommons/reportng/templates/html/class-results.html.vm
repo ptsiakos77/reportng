@@ -10,12 +10,11 @@
     #if ($testResult.testName)
       #set ($testInstanceName = " ($testResult.testName)")
     #end
-    #if ($testResult.method.description && $testResult.method.description.length() > 0)
-      <span class="description" title="$testResult.method.description">$testResult.name$testInstanceName</span>
-    #else
-      $testResult.name$testInstanceName
-    #end
+    $testResult.name$testInstanceName <br>
   </td>
+   #if ($testResult.method.description && $testResult.method.description.length() > 0)
+        <td class="description" title="$testResult.method.description">$testResult.method.description</td>
+   #end
   <td class="duration">
     $utils.formatDuration($testResult.startMillis, $testResult.endMillis)s
   </td>
@@ -76,5 +75,6 @@
     #end
     #set ($id = $id + 1)
   </td>
+  <td class="defect">$utils.getDefectNumber($testResult)</td>
 </tr>
 #end

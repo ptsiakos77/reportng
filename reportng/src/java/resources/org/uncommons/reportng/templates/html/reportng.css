@@ -20,7 +20,8 @@ td                       {font-size: 1.3em;}
 .test .passed            {background-color: #88ee88;}
 .test .skipped           {background-color: #ffff77;}
 .test .failed            {background-color: #ff8888;}
-.group                   {background-color: #cccccc; color: #000000; font-weight: bold;}
+.group                   {background-color: #c8c8c7; color: #000000; font-weight: bold;}
+.methodInfo              {background-color: #f0f0f0; color: #000000; font-weight: bold;}
 .suiteLinks              {float: right; font-weight: normal; vertical-align: middle;}
 .suiteLinks a            {color: #ffffff; margin-left: .5em;}
 .passRate                {font-weight: bold; text-align: right;}

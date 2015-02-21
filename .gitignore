@@ -6,3 +6,6 @@ docs
 website
 release
 temp
+.idea
+*.iml
+**/target

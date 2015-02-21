@@ -25,14 +25,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.testng.IInvokedMethod;
-import org.testng.ISuite;
-import org.testng.ISuiteResult;
-import org.testng.ITestContext;
-import org.testng.ITestNGMethod;
-import org.testng.ITestResult;
-import org.testng.Reporter;
-import org.testng.SkipException;
+
+import org.testng.*;
 
 /**
  * Utility class that provides various helper methods that can be invoked
@@ -219,15 +213,15 @@ public class ReportNGUtils
         String[] methods = result.getMethod().getMethodsDependedUpon();
         return commaSeparate(Arrays.asList(methods));
     }
-    
-    
-    public boolean hasSkipException(ITestResult result) 
+
+
+    public boolean hasSkipException(ITestResult result)
     {
-    	return result.getThrowable() instanceof SkipException;
+        return result.getThrowable() instanceof SkipException;
     }
-    
-    
-    public String getSkipExceptionMessage(ITestResult result) 
+
+
+    public String getSkipExceptionMessage(ITestResult result)
     {
         return hasSkipException(result) ? result.getThrowable().getMessage() : "";
     }
@@ -276,7 +270,7 @@ public class ReportNGUtils
         {
             return null;
         }
-        
+
         StringBuilder buffer = new StringBuilder();
         for(int i = 0; i < s.length(); i++)
         {
@@ -319,7 +313,7 @@ public class ReportNGUtils
         {
             return null;
         }
-        
+
         StringBuilder buffer = new StringBuilder();
         for(int i = 0; i < s.length(); i++)
         {
@@ -443,5 +437,22 @@ public class ReportNGUtils
     public String formatPercentage(int numerator, int denominator)
     {
         return PERCENTAGE_FORMAT.format(numerator / (double) denominator);
+    }
+
+    public String getDefectNumber(ITestResult result){
+        ITestNGMethod m =result.getMethod();
+        String defect = result.getTestClass().getXmlTest().getAllParameters().get("defect".concat(m.getMethodName()).concat("_").concat(m.getTestClass().getName()));
+        if (defect == null){
+            return  "";
+        }
+        return defect;
+    }
+
+    public String getTestClassDescription(ITestClass testClass){
+        String description = testClass.getXmlTest().getAllParameters().get("description".concat(testClass.getName()));
+        if (description == null){
+            return  "";
+        }
+        return description;
     }
 }
