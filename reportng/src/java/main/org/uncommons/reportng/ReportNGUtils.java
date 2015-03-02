@@ -441,7 +441,7 @@ public class ReportNGUtils
 
     public String getDefectNumber(ITestResult result){
         ITestNGMethod m =result.getMethod();
-        String defect = result.getTestClass().getXmlTest().getAllParameters().get("defect".concat(m.getMethodName()).concat("_").concat(m.getTestClass().getName()));
+        String defect = result.getTestClass().getXmlTest().getParameters().get("defect".concat(m.getMethodName()).concat("_").concat(m.getTestClass().getName()));
         if (defect == null){
             return  "";
         }
@@ -449,7 +449,7 @@ public class ReportNGUtils
     }
 
     public String getTestClassDescription(ITestClass testClass){
-        String description = testClass.getXmlTest().getAllParameters().get("description".concat(testClass.getName()));
+        String description = testClass.getXmlTest().getParameters().get("description".concat(testClass.getName()));
         if (description == null){
             return  "";
         }
