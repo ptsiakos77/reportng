@@ -2,5 +2,5 @@ language: java
 
 script:
   - cd reportng
-  - mvn clean test
+  - mvn clean install
 
