@@ -97,3 +97,6 @@ output:
       dialect of the XML format. Other tools, such as Ant's junitreport task,
       do not have a notion of skipped tests.  For these tools the dialect can
       be set to "junit" and skipped tests will be marked as failures.
+
+  ------------------------------------------
+      Push to trigger build in codeship
