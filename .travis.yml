@@ -1,0 +1,6 @@
+language: java
+
+script:
+  - cd reportng
+  - mvn clean install
+

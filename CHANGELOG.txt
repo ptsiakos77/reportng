@@ -55,3 +55,7 @@ Changes in version 1.1
 
 * Don't use System ClassLoader for loading templates.  Fixes problem using
   ReportNG with Gradle (see http://jira.codehaus.org/browse/GRADLE-836).
+
+ -------------------------
+ Push to repo to test codeship
+
