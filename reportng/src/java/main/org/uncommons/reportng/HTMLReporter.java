@@ -201,7 +201,7 @@ public class HTMLReporter extends AbstractReporter
 
 
     /**
-     * Group test methods by class and sort alphabetically.
+     * Group test methods by class and sort chronologically.
      */ 
     private SortedMap<IClass, List<ITestResult>> sortByTestClass(IResultMap results)
     {
