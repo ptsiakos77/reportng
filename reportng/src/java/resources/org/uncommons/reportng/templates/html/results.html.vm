@@ -18,6 +18,11 @@
   $messages.getString("testDuration"): $utils.formatDuration($utils.getDuration($result.testContext))s
 </p>
 
+#if($utils.getTestVideo($result.testContext) != "")
+<br>
+<a href=$utils.getTestVideo($result.testContext)><h2>Click here to watch the test video!</h2></a>
+#end
+
 #set ($id = 0)
 #if ($failedConfigurations.size() > 0)
   <table class="resultsTable configTable">
