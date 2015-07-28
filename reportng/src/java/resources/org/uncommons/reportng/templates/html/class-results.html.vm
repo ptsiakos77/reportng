@@ -76,5 +76,10 @@
     #set ($id = $id + 1)
   </td>
   <td class="defect">$utils.getDefectNumber($testResult)</td>
+  <td class="defect">
+   #if (!$utils.getTestVideoMethodSession($testResult).isEmpty())
+        <a href=$utils.getTestVideoMethodSession($testResult)>View</a>
+   #end
+   </td>
 </tr>
 #end

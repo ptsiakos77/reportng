@@ -416,4 +416,13 @@ public class ReportNGUtils {
             return "";
         }
     }
+
+    public String getTestVideoMethodSession(ITestResult testResult) {
+        Object videoUrl = testResult.getTestContext().getAttribute("video_url_"+testResult.getMethod().getMethod().getName());
+        if (videoUrl != null) {
+            return (String) videoUrl;
+        } else {
+            return "";
+        }
+    }
 }
