@@ -18,14 +18,19 @@
   $messages.getString("testDuration"): $utils.formatDuration($utils.getDuration($result.testContext))s
 </p>
 
+#if($utils.getTestVideo($result.testContext) != "")
+<br>
+<a href=$utils.getTestVideo($result.testContext)><h2>Click here to watch the test video!</h2></a>
+#end
+
 #set ($id = 0)
 #if ($failedConfigurations.size() > 0)
   <table class="resultsTable configTable">
-    <tr><th colspan="5" class="header failedConfig">$messages.getString("failedConfiguration")</th></tr>
+    <tr><th colspan="6" class="header failedConfig">$messages.getString("failedConfiguration")</th></tr>
     #set ($id = 0)
     #foreach ($testClass in $failedConfigurations.keySet())
       <tr class="group">
-        <td colspan="5">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
+        <td colspan="6">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
       </tr>
          <tr class="methodInfo">
             <td>Name</td>
@@ -33,18 +38,19 @@
             <td>Duration</td>
             <td>Logger Output</td>
             <td>Defect</td>
+            <td>Video Link</td>
          </tr>
       #set ($classResults = $failedConfigurations.get($testClass))
       #parse("org/uncommons/reportng/templates/html/class-results.html.vm")
     #end
 
     #if ($skippedConfigurations.size() > 0)
-      <tr><td colspan="5">&nbsp;</td></tr>
-      <tr><td colspan="5" class="header skippedConfig">$messages.getString("skippedConfiguration")</td></tr>
+      <tr><td colspan="6">&nbsp;</td></tr>
+      <tr><td colspan="6" class="header skippedConfig">$messages.getString("skippedConfiguration")</td></tr>
       #set ($id = 0)
       #foreach ($testClass in $skippedConfigurations.keySet())
         <tr>
-          <td colspan="5" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
+          <td colspan="6" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
         </tr>
         <tr class="methodInfo">
             <td>Name</td>
@@ -52,6 +58,7 @@
             <td>Duration</td>
             <td>Logger Output</td>
             <td>Defect</td>
+            <td>Video Link</td>
         </tr>
         #set ($classResults = $skippedConfigurations.get($testClass))
         #parse ("org/uncommons/reportng/templates/html/class-results.html.vm")
@@ -63,10 +70,10 @@
 
 #if ($failedTests.size() > 0)
   <table class="resultsTable">
-    <tr><th colspan="5" class="header failed">$messages.getString("failedTests")</th></tr>
+    <tr><th colspan="6" class="header failed">$messages.getString("failedTests")</th></tr>
     #foreach ($testClass in $failedTests.keySet())
       <tr>
-        <td colspan="5" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
+        <td colspan="6" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
        </tr>
         <tr class="methodInfo">
            <td>Name</td>
@@ -74,6 +81,7 @@
            <td>Duration</td>
            <td>Logger Output</td>
            <td>Defect</td>
+           <td>Video Link</td>
         </tr>
       #set ($classResults = $failedTests.get($testClass))
       #parse ("org/uncommons/reportng/templates/html/class-results.html.vm")
@@ -83,10 +91,10 @@
 
 #if ($skippedTests.size() > 0)
   <table class="resultsTable" width="100%">
-    <tr><th colspan="5" class="header skipped">$messages.getString("skippedTests")</th></tr>
+    <tr><th colspan="6" class="header skipped">$messages.getString("skippedTests")</th></tr>
     #foreach ($testClass in $skippedTests.keySet())
       <tr>
-        <td colspan="5" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
+        <td colspan="6" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
       </tr>
          <tr class="methodInfo">
             <td>Name</td>
@@ -94,6 +102,7 @@
             <td>Duration</td>
             <td>Logger Output</td>
             <td>Defect</td>
+             <td>Video Link</td>
          </tr>
       #set ($classResults = $skippedTests.get($testClass))
       #parse ("org/uncommons/reportng/templates/html/class-results.html.vm")
@@ -103,10 +112,10 @@
 
 #if ($passedTests.size() > 0)
   <table class="resultsTable">
-    <tr><th colspan="5" class="header passed">$messages.getString("passedTests")</th></tr>
+    <tr><th colspan="6" class="header passed">$messages.getString("passedTests")</th></tr>
     #foreach ($testClass in $passedTests.keySet())
       <tr>
-        <td colspan="5" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
+        <td colspan="6" class="group">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
       </tr>
       <tr class="methodInfo">
         <td>Name</td>
@@ -114,6 +123,7 @@
         <td>Duration</td>
         <td>Logger Output</td>
         <td>Defect</td>
+        <td>Video Link</td>
       </tr>
       #set ($classResults = $passedTests.get($testClass))
       #parse ("org/uncommons/reportng/templates/html/class-results.html.vm")
