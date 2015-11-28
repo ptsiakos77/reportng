@@ -20,7 +20,7 @@
 
 #if($utils.getTestVideo($result.testContext) != "")
 <br>
-<a href=$utils.getTestVideo($result.testContext)><h2>Click here to watch the test video!</h2></a>
+<a href=$utils.getTestVideo($result.testContext) target="_blank"><h2>Click here to watch the test video!</h2></a>
 #end
 
 #set ($id = 0)
@@ -130,6 +130,6 @@
     #end
   </table>
 #end
-  
+
 </body>
 </html>

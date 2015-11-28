@@ -82,11 +82,11 @@
         #set ($id = $id + 1)
     </td>
     <td class="defect"> #if (!$utils.getDefectNumber($testResult).isEmpty())
-        <a href=$utils.getDefectNumber($testResult)>View</a>
+        <a href=$utils.getDefectNumber($testResult) target="_blank">View</a>
     #end</td>
     <td class="defect">
         #if (!$utils.getTestVideoMethodSession($testResult).isEmpty())
-            <a href=$utils.getTestVideoMethodSession($testResult)>View</a>
+            <a href=$utils.getTestVideoMethodSession($testResult) target="_blank">View</a>
         #end
     </td>
 </tr>
