@@ -78,6 +78,10 @@ div.test                 {margin-top: 0.1em; clear: right; font-size: 1.3em;}
 .overviewTable tr        {height: 1.6em;}
 .overviewTable tr:hover  {background-color: #ffff99;}
 .overviewTable .test:hover  {background-color: #ffff99;}
+.resultsTable            { width: 100%;}
+
+.knownDefects            {background-color: #ff3399;}
+.test .knownDefects      {background-color: #ff99cc;}
 
 
 

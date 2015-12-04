@@ -16,6 +16,7 @@
 package org.uncommons.reportng;
 
 import org.testng.*;
+import org.testng.internal.ResultMap;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -391,6 +392,12 @@ public class ReportNGUtils {
         return PERCENTAGE_FORMAT.format(numerator / (double) denominator);
     }
 
+    /**
+     * Retrieves the defect number for a test annotated with @Defect
+     *
+     * @param result
+     * @return
+     */
     public String getDefectNumber(ITestResult result) {
         ITestNGMethod m = result.getMethod();
         String defect = result.getTestClass().getXmlTest().getParameters().get("defect".concat(m.getMethodName()).concat("_").concat(m.getTestClass().getName()));
@@ -400,6 +407,12 @@ public class ReportNGUtils {
         return defect;
     }
 
+    /**
+     * Retrieves the test class description for a class annotated with @Info
+     *
+     * @param testClass
+     * @return
+     */
     public String getTestClassDescription(ITestClass testClass) {
         String description = testClass.getXmlTest().getParameters().get("description".concat(testClass.getName()));
         if (description == null) {
@@ -408,6 +421,12 @@ public class ReportNGUtils {
         return description;
     }
 
+    /**
+     * Get the video url for a test (includes one or more test classes and corresponds to tha same selenium session)
+     *
+     * @param context
+     * @return
+     */
     public String getTestVideo(ITestContext context) {
         Object videoUrl = context.getAttribute("video_url");
         if (videoUrl != null) {
@@ -417,12 +436,39 @@ public class ReportNGUtils {
         }
     }
 
+    /**
+     * Get the video url for a specific test method (Useful when this test method runs in a different selenium session that the main test)
+     *
+     * @param testResult
+     * @return
+     */
     public String getTestVideoMethodSession(ITestResult testResult) {
-        Object videoUrl = testResult.getTestContext().getAttribute("video_url_"+testResult.getMethod().getMethod().getName());
+        Object videoUrl = testResult.getTestContext().getAttribute("video_url_" + testResult.getMethod().getMethod().getName());
         if (videoUrl != null) {
             return (String) videoUrl;
         } else {
             return "";
         }
     }
+
+    /**
+     * Returns a result map containing the failed test methods that are annotated with @Defect for each result in the test suite
+     *
+     * @param result
+     * @return
+     */
+    public IResultMap getKnownDefectsTests(ISuiteResult result) {
+        IResultMap allKnownDefects = (IResultMap) result.getTestContext().getSuite().getAttribute("knownDefects");
+        IResultMap specificTestKnownDefects = new ResultMap();
+        for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
+            Set<ITestResult> testResults = allKnownDefects.getResults(method);
+            if (!testResults.isEmpty()) {
+                for (ITestResult testResult : testResults) {
+                    specificTestKnownDefects.addResult(testResult, method);
+                }
+            }
+        }
+        return specificTestKnownDefects;
+    }
+
 }
