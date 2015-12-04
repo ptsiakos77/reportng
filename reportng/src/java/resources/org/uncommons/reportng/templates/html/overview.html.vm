@@ -62,8 +62,8 @@
             <th>$messages.getString("passRate")</th>
         </tr>
         #foreach ($result in $suite.results)
-            #set ($notPassedTests = $result.testContext.skippedTests.size() + $result.testContext.failedTests.size()+$utils.getOpenDefectsTests($result).size())
-            #set ($total = $result.testContext.passedTests.size() + $notPassedTests)
+            #set ($notPassedTests = $result.testContext.skippedTests.size() + $result.testContext.failedTests.size() + $utils.getOpenDefectsTests($result).size())
+            #set ($total = $result.testContext.passedTests.size() + $utils.getOpenDefectsTests($result).size() + $notPassedTests)
             #set ($totalTests = $totalTests + $total)
             #set ($totalPassed = $totalPassed + $result.testContext.passedTests.size())
             #set ($totalSkipped = $totalSkipped + $result.testContext.skippedTests.size())
@@ -158,7 +158,7 @@
 
             <td class="passRate suite">
                 #if ($totalTests > 0)
-      #set ($totalPasses = $totalTests - $totalSkipped - $totalFailed)
+      #set ($totalPasses = $totalTests - $totalSkipped - $totalFailed - $totalOpenDefects )
       $utils.formatPercentage($totalPasses, $totalTests)
       #else
                     $messages.getString("notApplicable")
