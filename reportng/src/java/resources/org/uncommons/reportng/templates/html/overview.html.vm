@@ -35,10 +35,11 @@
         #set ($totalPassed = 0)
         #set ($totalSkipped = 0)
         #set ($totalFailed = 0)
-        #set ($totalKnownDefects = 0)
+        #set ($totalOpenDefects = 0)
+        #set ($totalFixedDefects = 0)
 
         <tr>
-            <th colspan="7" class="header suite">
+            <th colspan="8" class="header suite">
                 <div class="suiteLinks">
                     #if (!$suite.invokedMethods.empty)
                     ##<a href="suite${suiteId}_chronology.html">$messages.getString("chronology")</a>
@@ -56,17 +57,19 @@
             <th>$messages.getString("passed")</th>
             <th>$messages.getString("skipped")</th>
             <th>$messages.getString("failed")</th>
-            <th>$messages.getString("knownDefects")</th>
+            <th>$messages.getString("openDefects")</th>
+            <th>$messages.getString("fixedDefects")</th>
             <th>$messages.getString("passRate")</th>
         </tr>
         #foreach ($result in $suite.results)
-            #set ($notPassedTests = $result.testContext.skippedTests.size() + $result.testContext.failedTests.size()+$utils.getKnownDefectsTests($result).size())
+            #set ($notPassedTests = $result.testContext.skippedTests.size() + $result.testContext.failedTests.size()+$utils.getOpenDefectsTests($result).size())
             #set ($total = $result.testContext.passedTests.size() + $notPassedTests)
             #set ($totalTests = $totalTests + $total)
             #set ($totalPassed = $totalPassed + $result.testContext.passedTests.size())
             #set ($totalSkipped = $totalSkipped + $result.testContext.skippedTests.size())
             #set ($totalFailed = $totalFailed + $result.testContext.failedTests.size())
-            #set ($totalKnownDefects = $totalKnownDefects + $utils.getKnownDefectsTests($result).size())
+            #set ($totalOpenDefects = $totalOpenDefects + $utils.getOpenDefectsTests($result).size())
+            #set ($totalFixedDefects = $totalFixedDefects + $utils.getFixedDefectsTests($result).size())
             #set ($failuresExist = $result.testContext.failedTests.size()>0 || $result.testContext.failedConfigurations.size()>0)
 
             #if (($onlyReportFailures && $failuresExist) || (!$onlyReportFailures))
@@ -96,11 +99,17 @@
                         <td class="zero number">0</td>
                     #end
 
-                    #if ($utils.getKnownDefectsTests($result).size() > 0)
-                        <td class="knownDefects number">$utils.getKnownDefectsTests($result).size()</td>
+                    #if ($utils.getOpenDefectsTests($result).size() > 0)
+                        <td class="openDefects number">$utils.getOpenDefectsTests($result).size()</td>
                     #else
                         <td class="zero number">0</td>
                     #end
+
+                    #if ($utils.getFixedDefectsTests($result).size() > 0)
+                          <td class="fixedDefects number">$utils.getFixedDefectsTests($result).size()</td>
+                    #else
+                          <td class="zero number">0</td>
+                     #end
 
                     <td class="passRate">
                         #if ($total > 0)
@@ -135,8 +144,14 @@
                 <td class="zero number">0</td>
             #end
 
-            #if ($totalKnownDefects > 0)
-                <td class="knownDefects number">$totalKnownDefects</td>
+            #if ($totalOpenDefects > 0)
+                <td class="openDefects number">$totalOpenDefects</td>
+            #else
+                <td class="zero number">0</td>
+            #end
+
+            #if ($totalFixedDefects > 0)
+                <td class="fixedDefects number">$totalFixedDefects</td>
             #else
                 <td class="zero number">0</td>
             #end

@@ -457,18 +457,37 @@ public class ReportNGUtils {
      * @param result
      * @return
      */
-    public IResultMap getKnownDefectsTests(ISuiteResult result) {
-        IResultMap allKnownDefects = (IResultMap) result.getTestContext().getSuite().getAttribute("knownDefects");
-        IResultMap specificTestKnownDefects = new ResultMap();
+    public IResultMap getOpenDefectsTests(ISuiteResult result) {
+        IResultMap allOpenDefects = (IResultMap) result.getTestContext().getSuite().getAttribute("openDefects");
+        IResultMap specificTestOpenDefects = new ResultMap();
         for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
-            Set<ITestResult> testResults = allKnownDefects.getResults(method);
+            Set<ITestResult> testResults = allOpenDefects.getResults(method);
             if (!testResults.isEmpty()) {
                 for (ITestResult testResult : testResults) {
-                    specificTestKnownDefects.addResult(testResult, method);
+                    specificTestOpenDefects.addResult(testResult, method);
                 }
             }
         }
-        return specificTestKnownDefects;
+        return specificTestOpenDefects;
     }
 
+    /**
+     * Returns a result map containing the passed test methods that are annotated with @Defect for each result in the test suite
+     *
+     * @param result
+     * @return
+     */
+    public IResultMap getFixedDefectsTests(ISuiteResult result) {
+        IResultMap allFixedDefects = (IResultMap) result.getTestContext().getSuite().getAttribute("fixedDefects");
+        IResultMap specificTestFixedDefects = new ResultMap();
+        for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
+            Set<ITestResult> testResults = allFixedDefects.getResults(method);
+            if (!testResults.isEmpty()) {
+                for (ITestResult testResult : testResults) {
+                    specificTestFixedDefects.addResult(testResult, method);
+                }
+            }
+        }
+        return specificTestFixedDefects;
+    }
 }

@@ -120,12 +120,12 @@
     </table>
     #end
 
-    #if ($knownDefects.size() > 0)
+    #if ($openDefects.size() > 0)
     <table class="resultsTable">
         <tr>
-            <th colspan="6" class="header knownDefects">$messages.getString("knownDefects")</th>
+            <th colspan="6" class="header openDefects">$messages.getString("openDefects")</th>
         </tr>
-        #foreach ($testClass in $knownDefects.keySet())
+        #foreach ($testClass in $openDefects.keySet())
             <tr>
                 <td colspan="6" class="group">Class: $testClass.name -
                     Info: $utils.getTestClassDescription($testClass)</td>
@@ -138,9 +138,33 @@
                 <td>Defect</td>
                 <td>Video Link</td>
             </tr>
-            #set ($classResults = $knownDefects.get($testClass))
+            #set ($classResults = $openDefects.get($testClass))
             #parse ("org/uncommons/reportng/templates/html/class-results.html.vm")
         #end
+    </table>
+    #end
+    
+    #if ($fixedDefects.size() > 0)
+    <table class="resultsTable">
+        <tr>
+             <th colspan="6" class="header fixedDefects">$messages.getString("fixedDefects")</th>
+         </tr>
+         #foreach ($testClass in $fixedDefects.keySet())
+             <tr>
+                 <td colspan="6" class="group">Class: $testClass.name -
+                        Info: $utils.getTestClassDescription($testClass)</td>
+              </tr>
+              <tr class="methodInfo">
+                  <td>Name</td>
+                  <td>Description</td>
+                  <td>Duration</td>
+                  <td>Logger Output</td>
+                  <td>Defect</td>
+                  <td>Video Link</td>
+              </tr>
+              #set ($classResults = $fixedDefects.get($testClass))
+              #parse ("org/uncommons/reportng/templates/html/class-results.html.vm")
+         #end
     </table>
     #end
 

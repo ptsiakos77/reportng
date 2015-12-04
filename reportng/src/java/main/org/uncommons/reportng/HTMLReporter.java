@@ -66,7 +66,8 @@ public class HTMLReporter extends AbstractReporter
     private static final String SKIPPED_CONFIG_KEY = "skippedConfigurations";
     private static final String FAILED_TESTS_KEY = "failedTests";
     private static final String SKIPPED_TESTS_KEY = "skippedTests";
-    private static final String KNOWN_DEFECTS_KEY = "knownDefects";
+    private static final String OPEN_DEFECTS_KEY = "openDefects";
+    private static final String FIXED_DEFECTS_KEY = "fixedDefects";
 
     private static final String PASSED_TESTS_KEY = "passedTests";
     private static final String ONLY_FAILURES_KEY = "onlyReportFailures";
@@ -189,7 +190,8 @@ public class HTMLReporter extends AbstractReporter
                     context.put(SKIPPED_CONFIG_KEY, sortByTestClass(result.getTestContext().getSkippedConfigurations()));
                     context.put(FAILED_TESTS_KEY, sortByTestClass(result.getTestContext().getFailedTests()));
                     context.put(SKIPPED_TESTS_KEY, sortByTestClass(result.getTestContext().getSkippedTests()));
-                    context.put(KNOWN_DEFECTS_KEY, sortByTestClass(new ReportNGUtils().getKnownDefectsTests(result)));  //Store failed test with known defect in a separate context
+                    context.put(OPEN_DEFECTS_KEY, sortByTestClass(new ReportNGUtils().getOpenDefectsTests(result)));  //Store failed test with open defect in a separate context
+                    context.put(FIXED_DEFECTS_KEY, sortByTestClass(new ReportNGUtils().getFixedDefectsTests(result)));  //Store passed test with fixed defect in a separate context
                     context.put(PASSED_TESTS_KEY, sortByTestClass(result.getTestContext().getPassedTests()));
                     String fileName = String.format("suite%d_test%d_%s", index, index2, RESULTS_FILE);
                     generateFile(new File(outputDirectory, fileName),
