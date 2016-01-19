@@ -460,11 +460,13 @@ public class ReportNGUtils {
     public IResultMap getOpenDefectsTests(ISuiteResult result) {
         IResultMap allOpenDefects = (IResultMap) result.getTestContext().getSuite().getAttribute("openDefects");
         IResultMap specificTestOpenDefects = new ResultMap();
-        for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
-            Set<ITestResult> testResults = allOpenDefects.getResults(method);
-            if (!testResults.isEmpty()) {
-                for (ITestResult testResult : testResults) {
-                    specificTestOpenDefects.addResult(testResult, method);
+        if (allOpenDefects != null) {
+            for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
+                Set<ITestResult> testResults = allOpenDefects.getResults(method);
+                if (!testResults.isEmpty()) {
+                    for (ITestResult testResult : testResults) {
+                        specificTestOpenDefects.addResult(testResult, method);
+                    }
                 }
             }
         }
@@ -480,11 +482,13 @@ public class ReportNGUtils {
     public IResultMap getFixedDefectsTests(ISuiteResult result) {
         IResultMap allFixedDefects = (IResultMap) result.getTestContext().getSuite().getAttribute("fixedDefects");
         IResultMap specificTestFixedDefects = new ResultMap();
-        for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
-            Set<ITestResult> testResults = allFixedDefects.getResults(method);
-            if (!testResults.isEmpty()) {
-                for (ITestResult testResult : testResults) {
-                    specificTestFixedDefects.addResult(testResult, method);
+        if (allFixedDefects != null) {
+            for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
+                Set<ITestResult> testResults = allFixedDefects.getResults(method);
+                if (!testResults.isEmpty()) {
+                    for (ITestResult testResult : testResults) {
+                        specificTestFixedDefects.addResult(testResult, method);
+                    }
                 }
             }
         }
