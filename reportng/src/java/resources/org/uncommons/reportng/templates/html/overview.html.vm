@@ -52,7 +52,7 @@
             </th>
         </tr>
         <tr class="columnHeadings">
-            <td>&nbsp;</td>
+            <td class="header groupHeader">Results listed by group</td>
             <th>$messages.getString("duration")</th>
             <th>$messages.getString("passed")</th>
             <th>$messages.getString("skipped")</th>
@@ -61,65 +61,73 @@
             <th>$messages.getString("fixedDefects")</th>
             <th>$messages.getString("passRate")</th>
         </tr>
-        #foreach ($result in $suite.results)
-            #set ($notPassedTests = $result.testContext.skippedTests.size() + $result.testContext.failedTests.size() + $utils.getOpenDefectsTests($result).size())
-            #set ($total = $result.testContext.passedTests.size() + $utils.getOpenDefectsTests($result).size() + $notPassedTests)
-            #set ($totalTests = $totalTests + $total)
-            #set ($totalPassed = $totalPassed + $result.testContext.passedTests.size())
-            #set ($totalSkipped = $totalSkipped + $result.testContext.skippedTests.size())
-            #set ($totalFailed = $totalFailed + $result.testContext.failedTests.size())
-            #set ($totalOpenDefects = $totalOpenDefects + $utils.getOpenDefectsTests($result).size())
-            #set ($totalFixedDefects = $totalFixedDefects + $utils.getFixedDefectsTests($result).size())
-            #set ($failuresExist = $result.testContext.failedTests.size()>0 || $result.testContext.failedConfigurations.size()>0)
 
-            #if (($onlyReportFailures && $failuresExist) || (!$onlyReportFailures))
-                <tr class="test">
-                    <td class="test">
-                        <a href="suite${suiteId}_test${velocityCount}_results.html">${result.testContext.name}</a>
-                    </td>
-                    <td class="duration">
-                        $utils.formatDuration($utils.getDuration($result.testContext))s
-                    </td>
 
-                    #if ($result.testContext.passedTests.size() > 0)
-                        <td class="passed number">$result.testContext.passedTests.size()</td>
-                    #else
-                        <td class="zero number">0</td>
-                    #end
+        #foreach ($group in $utils.getGroupNames($suite))
+            #set ($groupId = $velocityCount)
+            <tr>
+                <td colspan="8" class="group">$group</td>
+            </tr>
+            #foreach ($result in $utils.getResultsByGroup($suite).get($group))
+                #set ($notPassedTests = $result.testContext.skippedTests.size() + $result.testContext.failedTests.size() + $utils.getOpenDefectsTests($result).size())
+                #set ($total = $result.testContext.passedTests.size() + $utils.getOpenDefectsTests($result).size() + $notPassedTests)
+                #set ($totalTests = $totalTests + $total)
+                #set ($totalPassed = $totalPassed + $result.testContext.passedTests.size())
+                #set ($totalSkipped = $totalSkipped + $result.testContext.skippedTests.size())
+                #set ($totalFailed = $totalFailed + $result.testContext.failedTests.size())
+                #set ($totalOpenDefects = $totalOpenDefects + $utils.getOpenDefectsTests($result).size())
+                #set ($totalFixedDefects = $totalFixedDefects + $utils.getFixedDefectsTests($result).size())
+                #set ($failuresExist = $result.testContext.failedTests.size()>0 || $result.testContext.failedConfigurations.size()>0)
 
-                    #if ($result.testContext.skippedTests.size() > 0)
-                        <td class="skipped number">$result.testContext.skippedTests.size()</td>
-                    #else
-                        <td class="zero number">0</td>
-                    #end
+                #if (($onlyReportFailures && $failuresExist) || (!$onlyReportFailures))
+                    <tr class="test">
+                        <td class="test">
+                            <a href="suite${suiteId}_group${groupId}_test${velocityCount}_results.html">${result.testContext.name}</a>
+                        </td>
+                        <td class="duration">
+                            $utils.formatDuration($utils.getDuration($result.testContext))s
+                        </td>
 
-                    #if ($result.testContext.failedTests.size() > 0)
-                        <td class="failed number">$result.testContext.failedTests.size()</td>
-                    #else
-                        <td class="zero number">0</td>
-                    #end
-
-                    #if ($utils.getOpenDefectsTests($result).size() > 0)
-                        <td class="openDefects number">$utils.getOpenDefectsTests($result).size()</td>
-                    #else
-                        <td class="zero number">0</td>
-                    #end
-
-                    #if ($utils.getFixedDefectsTests($result).size() > 0)
-                          <td class="fixedDefects number">$utils.getFixedDefectsTests($result).size()</td>
-                    #else
-                          <td class="zero number">0</td>
-                     #end
-
-                    <td class="passRate">
-                        #if ($total > 0)
-      #set ($passes = $total - $notPassedTests)
-      $utils.formatPercentage($passes, $total)
-      #else
-                            $messages.getString("notApplicable")
+                        #if ($result.testContext.passedTests.size() > 0)
+                            <td class="passed number">$result.testContext.passedTests.size()</td>
+                        #else
+                            <td class="zero number">0</td>
                         #end
-                    </td>
-                </tr>
+
+                        #if ($result.testContext.skippedTests.size() > 0)
+                            <td class="skipped number">$result.testContext.skippedTests.size()</td>
+                        #else
+                            <td class="zero number">0</td>
+                        #end
+
+                        #if ($result.testContext.failedTests.size() > 0)
+                            <td class="failed number">$result.testContext.failedTests.size()</td>
+                        #else
+                            <td class="zero number">0</td>
+                        #end
+
+                        #if ($utils.getOpenDefectsTests($result).size() > 0)
+                            <td class="openDefects number">$utils.getOpenDefectsTests($result).size()</td>
+                        #else
+                            <td class="zero number">0</td>
+                        #end
+
+                        #if ($utils.getFixedDefectsTests($result).size() > 0)
+                            <td class="fixedDefects number">$utils.getFixedDefectsTests($result).size()</td>
+                        #else
+                            <td class="zero number">0</td>
+                        #end
+
+                        <td class="passRate">
+                            #if ($total > 0)
+                          #set ($passes = $total - $notPassedTests)
+                         $utils.formatPercentage($passes, $total)
+                        #else
+                                $messages.getString("notApplicable")
+                            #end
+                        </td>
+                    </tr>
+                #end
             #end
         #end
 

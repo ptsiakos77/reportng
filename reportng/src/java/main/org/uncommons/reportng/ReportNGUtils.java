@@ -18,6 +18,7 @@ package org.uncommons.reportng;
 import org.testng.*;
 import org.testng.internal.ResultMap;
 
+import java.lang.annotation.Annotation;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
@@ -392,6 +393,67 @@ public class ReportNGUtils {
         return PERCENTAGE_FORMAT.format(numerator / (double) denominator);
     }
 
+    public Map<String, List<ISuiteResult>> getResultsByGroup(ISuite suite) {
+        Map<String, List<ISuiteResult>> resultsByGroup = new HashMap<String, List<ISuiteResult>>();
+        Set<String> groups = getGroupNames(suite);
+        List<ISuiteResult> resultsForEmptyGroup = new ArrayList<ISuiteResult>();
+        for (ISuiteResult result : suite.getResults().values()) {
+            boolean hasGroups = false;
+            ITestNGMethod[] testMethods = result.getTestContext().getAllTestMethods();
+            outer:
+            for (ITestNGMethod testMethod : testMethods) {
+                for (String group : groups) {
+                    List<ISuiteResult> resultsForGroup = new ArrayList<ISuiteResult>();
+                    if (getTestClassGroup(testMethod.getTestClass()).contains(group)) {
+                        resultsForGroup.add(result);
+                        if (resultsByGroup.get(group) != null) {
+                            resultsForGroup.addAll(resultsByGroup.get(group));
+                        }
+                        resultsByGroup.put(group, resultsForGroup);
+                        hasGroups = true;
+                        break outer;
+                    }
+                }
+            }
+            if (!hasGroups) {
+                resultsForEmptyGroup.add(result);
+            }
+        }
+        if (!resultsForEmptyGroup.isEmpty()) {
+            if (resultsByGroup.get("No Group") != null) {
+                resultsForEmptyGroup.addAll(resultsByGroup.get("No Group"));
+            }
+            resultsByGroup.put("No Group", resultsForEmptyGroup);
+        }
+        return resultsByGroup;
+    }
+
+    public Set<String> getGroupNames(ISuite suite) {
+        Set<String> groups = new HashSet<String>();
+        for (ISuiteResult result : suite.getResults().values()) {
+            for (ITestNGMethod method : result.getTestContext().getAllTestMethods()) {
+                String group = getTestClassGroup(method.getTestClass());
+                if (!group.isEmpty()) {
+                    groups.add(group);
+                } else {
+                    groups.add("No Group");
+                }
+            }
+        }
+        return groups;
+    }
+
+    public String getTestClassGroup(ITestClass iTestClass) {
+        String group = "";
+        Annotation[] annotations = iTestClass.getRealClass().getAnnotations();
+        for (Annotation a : annotations) {
+            if (a.toString().contains("Group(name=")) {
+                group = a.toString().split("=")[1].replace(")", "");
+            }
+        }
+        return group;
+    }
+
     /**
      * Retrieves the defect number for a test annotated with @Defect
      *
@@ -472,6 +534,7 @@ public class ReportNGUtils {
         }
         return specificTestOpenDefects;
     }
+
 
     /**
      * Returns a result map containing the passed test methods that are annotated with @Defect for each result in the test suite
