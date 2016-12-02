@@ -18,7 +18,20 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  
+
+    <distributionManagement>
+        <repository>
+            <id>aws-release</id>
+            <name>AWS Release Repository</name>
+            <url>s3://workable-private-repo/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>aws-snapshot</id>
+            <name>AWS Snapshot Repository</name>
+            <url>s3://workable-private-repo/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
@@ -68,6 +81,15 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.springframework.build</groupId>
+                <artifactId>aws-maven</artifactId>
+                <version>5.0.0.RELEASE</version>
+            </extension>
+        </extensions>
+
     </build>
 
 </project>
