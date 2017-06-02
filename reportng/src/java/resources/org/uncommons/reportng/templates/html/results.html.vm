@@ -35,6 +35,9 @@
             <tr class="group">
                 <td colspan="5">Class: $testClass.name - Info: $utils.getTestClassDescription($testClass)</td>
             </tr>
+            <tr>
+                <td colspan="5" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
+            </tr>
             <tr class="methodInfo">
                 <td>Name</td>
                 <td>Description</td>
@@ -58,6 +61,9 @@
                 <tr>
                     <td colspan="5" class="group">Class: $testClass.name -
                         Info: $utils.getTestClassDescription($testClass)</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
                 </tr>
                 <tr class="methodInfo">
                     <td>Name</td>
@@ -84,6 +90,9 @@
                 <td colspan="5" class="group">Class: $testClass.name -
                     Info: $utils.getTestClassDescription($testClass)</td>
             </tr>
+            <tr>
+                <td colspan="5" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
+            </tr>
             <tr class="methodInfo">
                 <td>Name</td>
                 <td>Description</td>
@@ -107,6 +116,9 @@
                 <td colspan="5" class="group">Class: $testClass.name -
                     Info: $utils.getTestClassDescription($testClass)</td>
             </tr>
+            <tr>
+                <td colspan="5" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
+            </tr>
             <tr class="methodInfo">
                 <td>Name</td>
                 <td>Description</td>
@@ -129,6 +141,9 @@
             <tr>
                 <td colspan="6" class="group">Class: $testClass.name -
                     Info: $utils.getTestClassDescription($testClass)</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
             </tr>
             <tr class="methodInfo">
                 <td>Name</td>
@@ -154,6 +169,9 @@
                  <td colspan="6" class="group">Class: $testClass.name -
                         Info: $utils.getTestClassDescription($testClass)</td>
               </tr>
+             <tr>
+                 <td colspan="6" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
+             </tr>
               <tr class="methodInfo">
                   <td>Name</td>
                   <td>Description</td>
@@ -177,6 +195,9 @@
             <tr>
                 <td colspan="5" class="group">Class: $testClass.name -
                     Info: $utils.getTestClassDescription($testClass)</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="acceptance">ACCCEPTANCE CRITERIA: $utils.getTestClassAcceptanceCriteria($testClass)</td>
             </tr>
             <tr class="methodInfo">
                 <td>Name</td>

@@ -21,6 +21,7 @@ td                       {font-size: 1.3em;}
 .test .skipped           {background-color: #ffff77;}
 .test .failed            {background-color: #ff8888;}
 .group                   {background-color: #c8c8c7; color: #000000; font-weight: bold;}
+.acceptance              {background-color: #6495ed; color: #000000; font-weight: bold;}
 .groupHeader             {background-color: #ffffff; color: #000000; font-weight: bold;}
 .methodInfo              {background-color: #f0f0f0; color: #000000; font-weight: bold;}
 .suiteLinks              {float: right; font-weight: normal; vertical-align: middle;}

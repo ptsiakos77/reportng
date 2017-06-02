@@ -454,6 +454,18 @@ public class ReportNGUtils {
         return group;
     }
 
+    public String getTestClassAcceptanceCriteria(ITestClass iTestClass) {
+        String acceptance = "";
+        Annotation[] annotations = iTestClass.getRealClass().getAnnotations();
+        for (Annotation a : annotations) {
+            if (a.toString().contains("Acceptance(criteria=")) {
+                acceptance = a.toString().split("=")[1];
+            }
+        }
+        return acceptance;
+    }
+
+
     /**
      * Retrieves the defect number for a test annotated with @Defect
      *
