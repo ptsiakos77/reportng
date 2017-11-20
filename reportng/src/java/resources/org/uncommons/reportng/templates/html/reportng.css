@@ -22,16 +22,16 @@ td                       {font-size: 1.3em;}
 .test .failed            {background-color: #ff8888;}
 .group                   {background-color: #c8c8c7; color: #000000; font-weight: bold;}
 .groupHeader             {background-color: #ffffff; color: #000000; font-weight: bold;}
-.methodInfo              {background-color: #f0f0f0; color: #000000; font-weight: bold;}
+.methodInfo              {background-color: #f0f0f0; color: #000000; font-weight: bold; text-align: center;}
 .suiteLinks              {float: right; font-weight: normal; vertical-align: middle;}
 .suiteLinks a            {color: #ffffff; margin-left: .5em;}
 .passRate                {font-weight: bold; text-align: right;}
-.duration                {text-align: right;}
+.duration                {text-align: right; }
 .thread                  {white-space: nowrap;}
 
 .resultsTable            {border: 0; width: 100%; margin-top: 1.8em; line-height: 1.7em; border-spacing: 0.1em;}
 .resultsTable .method    {width: 18em;}
-.resultsTable .duration  {width: 6em;}
+.resultsTable .duration  {width: 8em;}
 .resultsTable td         {vertical-align: top; padding: 0 1em;}
 .resultsTable th         {padding: 0 .5em;}
 .number                  {text-align: right;}
@@ -73,7 +73,7 @@ div.test                 {margin-top: 0.1em; clear: right; font-size: 1.3em;}
 .overviewTable           {width: 100%; margin-top: 1.8em; line-height: 1.7em; border-spacing: 0.1em;}
 .overviewTable td        {padding: 0 1em;}
 .overviewTable th        {padding: 0 .5em;}
-.overviewTable .duration {width: 6em;}
+.overviewTable .duration {width: 8em;}
 .overviewTable .passRate {width: 6em;}
 .overviewTable .number   {width: 5em;}
 .overviewTable tr        {height: 1.6em;}

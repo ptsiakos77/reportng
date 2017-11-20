@@ -73,8 +73,21 @@ public class ReportNGUtils {
 
 
     public String formatDuration(long elapsed) {
-        double seconds = (double) elapsed / 1000;
-        return DURATION_FORMAT.format(seconds);
+        String format = "";
+        Double seconds = (double) elapsed / 1000;
+        if (seconds >= 60) {
+            format = String.valueOf(seconds.intValue() / 60) + "m ";
+            seconds = seconds % 60;
+        }
+        if (seconds >= 1) {
+            format += String.valueOf(seconds.intValue()) + "s ";
+            if (((long) (seconds * 1000) & 1000) >= 1) {
+                format += String.valueOf((long) (seconds * 1000) & 1000) + "ms";
+            }
+        } else {
+            format += (String.valueOf((long) (seconds * 1000))) + "ms";
+        }
+        return format;
     }
 
 

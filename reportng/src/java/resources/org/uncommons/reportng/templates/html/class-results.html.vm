@@ -16,7 +16,7 @@
         <td class="description" title="$testResult.method.description">$testResult.method.description</td>
     #end
     <td class="duration">
-        $utils.formatDuration($testResult.startMillis, $testResult.endMillis)s
+        $utils.formatDuration($testResult.startMillis, $testResult.endMillis)
     </td>
     <td class="result">
     ## Display the dependencies for skipped test methods.

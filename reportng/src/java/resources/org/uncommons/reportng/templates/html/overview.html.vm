@@ -85,7 +85,7 @@
                             <a href="suite${suiteId}_group${groupId}_test${velocityCount}_results.html">${result.testContext.name}</a>
                         </td>
                         <td class="duration">
-                            $utils.formatDuration($utils.getDuration($result.testContext))s
+                            $utils.formatDuration($utils.getDuration($result.testContext))
                         </td>
 
                         #if ($result.testContext.passedTests.size() > 0)

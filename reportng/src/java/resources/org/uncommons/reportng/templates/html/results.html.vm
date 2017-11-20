@@ -16,7 +16,7 @@
 <h1>$result.testContext.name</h1>
 
 <p>
-    $messages.getString("testDuration"): $utils.formatDuration($utils.getDuration($result.testContext))s
+    $messages.getString("testDuration"): $utils.formatDuration($utils.getDuration($result.testContext))
 </p>
 
     #if($utils.getTestVideo($result.testContext) != "")
