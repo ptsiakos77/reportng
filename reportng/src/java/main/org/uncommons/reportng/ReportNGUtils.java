@@ -461,7 +461,7 @@ public class ReportNGUtils {
         Annotation[] annotations = iTestClass.getRealClass().getAnnotations();
         for (Annotation a : annotations) {
             if (a.toString().contains("Group(name=")) {
-                group = a.toString().split("=")[1].replace(")", "");
+                group = a.toString().split("=")[1].replace(")", "").replace("[","").replace("]","").split(",")[0];
             }
         }
         return group;
